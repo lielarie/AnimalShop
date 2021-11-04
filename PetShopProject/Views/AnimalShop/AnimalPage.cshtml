@@ -1,0 +1,50 @@
+﻿@model AnimalShopProject.Models.Animal
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewBag.Title = Model.Name + "Page";
+}
+<link rel="stylesheet" href="~/Styles/CSStyle.css" />
+<h1>@await Html.PartialAsync("_MyPartialView")</h1>
+<table class="table">
+    <tr>
+        <td>Name</td>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <td>Age</td>
+        <td>@Model.Age</td>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td>@Model.Description</td>
+    </tr>
+    <tr>
+        <td>Category</td>
+        <td>@Model.Category.CategoryName</td>
+    </tr>
+</table>
+<h3><b>Comments:</b></h3>
+<table class="table">
+    @foreach (AnimalShopProject.Models.Comment comment in ViewBag.Comments)
+    {
+        <tr>
+            <td>
+                @comment.CommentInfo
+            </td>
+        </tr>
+    }
+</table>
+
+<form asp-action="ReceivePost" method="post" asp-route-animalId="@Model.AnimalId">
+    <input name="comment" id="comment" type="text" action="ReceivePost" />
+    <input type="submit" value="Submit comment" />
+</form>
+
+@section SideBar {
+    <br />
+    <br />
+    <br />
+    <div>
+        @await Html.PartialAsync("_ButtonsPartial")
+    </div>
+}

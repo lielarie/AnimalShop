@@ -1,0 +1,25 @@
+﻿<div class="nav nav-pills nav-justified">
+    <nav class="navbar navbar-expand-xl bg-dark navbar-dark fixed-top">
+        <a class="navbar-brand">
+            <img src="~/Images/PetShopLogo.jpg" alt="logo" style="width:100px;">
+        </a>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link">
+                    <input type="button" value="Home" onclick="window.location.href = '@Url.Action("MainPage", "AnimalShop")';" />
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">
+                    <input type="button" value="Catalog" onclick="window.location.href = '@Url.Action("CatalogPage", "AnimalShop", null)';" />
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">
+                    <input type="button" value="Administrator" onclick="window.location.href = '@Url.Action("AdminPage", "AnimalShop")';" />
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+

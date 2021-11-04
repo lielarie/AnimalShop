@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "New Animal";
+}
+<link rel="stylesheet" href="~/Styles/CSStyle.css" />
+@using (Html.BeginForm("AddAnimal", "AnimalShop", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <h2 style="color: red">@TempData["Message"]</h2>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Picture</th>
+            <th>Description</th>
+            <th>Category</th>
+        </tr>
+        <tr>
+            <td><input type="text" name="name" /></td>
+            <td><input type="number" name="age" /></td>
+            <td class="custom-file">
+                <input type="file" name="iFile" class="custom-file-input" id="iFile" />
+                <label class="custom-file-label" for="iFile">Choose file</label>
+                <script>
+                    $(".custom-file-input").on("change", function () {
+                        var fileName = $(this).val().split("\\").pop();
+                        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                    });
+                </script>
+                <hr />
+                <h4>@ViewBag.Message</h4>
+            </td>
+            <td><textarea cols="30" rows="5" name="description"></textarea></td>
+            <td><input type="text" name="category"></td>
+        </tr>
+    </table>
+    <input type="submit" value="Add Animal" onclick=" window.location.href = '@Url.Action("AddAnimal", "AnimalShop")';" />
+}
+
+@section SideBar {
+    <br />
+    <br />
+    <br />
+    <div>
+        @await Html.PartialAsync("_ButtonsPartial")
+    </div>
+}

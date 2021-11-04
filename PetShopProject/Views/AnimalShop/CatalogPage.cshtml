@@ -1,0 +1,55 @@
+﻿@model IEnumerable<AnimalShopProject.Models.Animal>
+@{
+    ViewBag.Title = "CatalogPage";
+}
+<link rel="stylesheet" href="~/Styles/CSStyle.css"/>
+<script>
+    function doNavigate() {
+        window.location.href = document.getElementById("UrlList").value;
+    }
+</script>
+<h1>@await Html.PartialAsync("_MyPartialView")</h1>
+<label for="Categories">Choose a category</label>
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        Select Category
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li>
+            <a href="@Url.Action("CatalogPage", "AnimalShop")">All Animals</a>
+        </li>
+        @foreach (AnimalShopProject.Models.Category category in ViewBag.CategoryList)
+        {
+            <li>
+                <a href="@Url.Action("CatalogPage", "AnimalShop", new { cat = category.CategoryId })">@category.CategoryName</a>
+            </li>
+        }
+    </ul>
+</div>
+<table class="table table-hover thead-dark">
+    <tr>
+        <th>Picture</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Find out more and comment</th>
+    </tr>
+    @foreach (var pet in Model)
+    {
+        <tr>
+            <td><img src="~/@pet.Picture.ImagePath" width="150" height="150" /></td>
+            <td>@pet.Name</td>
+            <td>@pet.Category.CategoryName</td>
+            <td><input type="button" value="Details" onclick="window.location.href = '@Url.Action("AnimalPage", "AnimalShop", new { animalId = pet.AnimalId })';" /></td>
+        </tr>
+    }
+</table>
+@section SideBar {
+    <br />
+    <br />
+    <br />
+    <div>
+        @await Html.PartialAsync("_ButtonsPartial")
+    </div>
+}
+
